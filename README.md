@@ -2,4 +2,4 @@
 CRUD Sencillo Creado con Python, Django, HTML y Bootstrap
 
 Esta seria un visual de lo que seria el CRUD.
-![Image text]()
+![Image text](https://github.com/JesusAnayaDev/CRUD_Python-Django/blob/main/Tienda/images/VisualDelCRUD.png)
