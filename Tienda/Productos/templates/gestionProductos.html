@@ -1,0 +1,66 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestion de Productos {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible fade show alert-success">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        
+        {% endfor %}
+        {% endif %} 
+        <h2>Gestion de Productos</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarProducto/" method="POST">{% csrf_token %}
+                    <div class="form-group py-2">
+                        <input type="text" class="form-control" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Codigo" minlength="6" maxlength="6" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" maxlength="50" required>
+                    </div> 
+                    <div class="form-group py-2">
+                        <input type="text" id="numCantidad" name="numCantidad" class="form-control" min="1" max="9" value="1" required>
+                    </div>
+                        <div class="d-grid gap-2">
+                          <button type="submit" class="btn btn-info">Guardar</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de Productos</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in productos %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{c.codigo}}</td>
+                        <td>{{c.nombre}}</td>
+                        <td>{{c.cantidad}}</td>
+                        <td><a href="edicionProducto/{{c.codigo}}" class="btn btn-success">Editar</a></td>
+                        <td><a href="eliminarProducto/{{c.codigo}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
